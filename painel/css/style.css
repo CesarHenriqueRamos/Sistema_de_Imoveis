@@ -1,0 +1,620 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    outline:none;
+}
+html,body{
+    height: 100%;
+    /**/background-color: rgb(225,225,225) ;
+}
+body{
+    overflow-x: hidden;
+}
+/*pagamentos*/
+input#pagamentos{
+    width: 250px;
+}
+.col2{
+    width: 20%;
+    float: left;
+    padding: 5px 0;
+    
+}
+/* classes padroes*/
+.container{
+    max-width: 1020px;
+    width: 100%;
+    padding: 0 2%;
+    margin: 0 auto;
+}
+.clear{
+    clear: both;
+}
+.w100{
+    width: 100%;    
+    float: left;
+}
+.w50{
+    width: 49%;    
+    float: left;
+    background-color: red;
+}
+.marge-right{
+    margin-right: 2%;
+}
+.w33{
+    width: 31.3%;
+    float: left;
+}
+
+/*pagina login*/
+body.log{
+    background-color: #5E3EA1;
+}
+/*login*/
+.login{
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    padding: 40px 2%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 20px;
+    box-shadow: 10px 10px 5px rgba(0,0,0,0.7);
+}
+.login h2{
+    color: rgb(35, 10, 88);
+    text-align: center;
+}
+div.lembrar{
+    float: right;
+    width: 120px;
+    margin-top: 20px;
+}
+.lembrar input[type = checkbox]{
+    float: right;
+    width: 20px;
+    margin-top: 6px;
+}
+
+input, select,textarea{
+    margin: 10px 2%;
+    width: calc(100% - 4%);
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: #E8F0FE;
+}
+textarea{
+    resize: none;
+}
+input[type=submit]{
+    width: 130px;
+    color: white;
+    background-color: #5E3EA1;
+    cursor: pointer;
+    border: 0;
+}
+input[type=file]{
+    border: none;
+    background-color: white;
+}
+
+.sucesso{
+    position: fixed;
+    right: 20px;
+    top: 70px;
+    padding: 10px 20px;
+    z-index: 3;
+    background-color: #4db6ac;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+}
+.err{
+    position: fixed;
+    right: 20px;
+    top: 70px;
+    padding: 10px 20px;
+    z-index: 3;
+    background-color: #d84315;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+}
+.erro{
+    text-align: center;
+    font-size: 17px;
+    background-color: red;
+    color: white;
+    padding: 10px 2%;
+    border-radius: 20px;
+}
+.erro i{
+    font-size: 20px;
+    
+}
+.menu-active::before{
+    content: '>> ';
+}
+/*pagina main*/
+header{
+    background-color: rgb(35, 10, 88);
+    padding: 10px 0;
+    width: calc(100% - 250px);
+    height: 60px;
+    position: relative;
+    left: 250px;
+}
+/*menu*/
+div.menu{
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height:100%;
+    float: left;
+    background-color: rgb(66, 66, 66);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.menu-wraper{
+    width: 250px;
+    padding: 10px 0;
+}
+.menu-wraper h2{
+    font-size: 16px;
+    font-weight: 300;
+    padding: 5px 10px;
+    color: white;
+    background-color: rgb(24, 24, 24);
+}
+.menu-wraper a{
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: lighter;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    display: block;
+    border-bottom: 3px solid rgb(24, 24, 24);
+}
+/*ocultação*/
+.logout{
+    float: right;
+}
+.logout a{
+    height: 60px;
+    padding: 0 20px;
+    position: relative;
+    top: 8px;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+div.menu-btn{
+    float: left;
+    font-size: 23px;
+    color: white;
+    cursor: pointer; 
+}
+div.btn-home{
+    display: inline;
+    
+}
+div.btn-home a.home{
+    height: 60px;
+    width: 100px;
+    padding: 20px 20px;
+     background-color: #5E3EA1;
+     cursor: pointer; 
+ }
+/*area de conteudo*/
+div.conteudo{
+    width: calc(100% - 250px);
+    position: relative;
+    top: 60px;
+    left: 250px;
+}
+div.box-container{
+    border-radius: 10px;
+    margin-bottom: 25px;
+    padding: 30px;
+    background-color:white;
+}
+.box-container h2{
+    font-size: 23px;
+    font-weight: 300;
+}
+.box-container h2.title{
+    font-size: 18px;
+    font-weight: 300;
+    padding-bottom: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+.box-container .w33{
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.box-container h3{
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+}
+.box-container p{
+    font-size: 18px;
+    font-weight: 300;
+    color: white;
+}
+.user{
+    background-color: #F4B03E;
+}
+.visita{
+    background-color: #E05C4E;
+}
+.visita-hoje{
+    background-color: #00BFA5;
+}
+/*avata*/
+.avata-user, div.img-user img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border:3px solid #303030;  
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.avata-user i{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    font-size: 35px;
+}
+p#bem-vindo{
+    padding: 0 2%;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: white;
+    font-size: 15px;
+}
+p#cargo{
+    padding: 0 2%;
+    width: 100%;
+    text-align: center;
+    display: block;
+    color: white;
+    font-size: 14px;
+}
+/*tabela responciva*/
+
+
+.tabela-responciva{
+    margin-top: 10px;
+}
+.tabela-responciva .row{
+    padding-left: 20px;
+}
+.tabela-responciva .row:nth-child(1){
+    font-weight: bold;
+    color:white;
+    background-color: #F4B03E;    
+    border-radius: 10px;
+}
+.col{
+    width: 50%;
+    float: left;
+    padding: 5px 0;
+}
+/*tabela responciva depoimento*/
+.scroll{
+    overflow-x: auto;
+}
+.depoimento{
+    min-width: 700px;
+}
+.depoimento .col{
+    width: 30%;
+    float: left;
+    padding: 5px 0;
+}
+.depoimento .col1{
+    width: 10%;
+    float: left;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.col1 i{
+    color: white;
+}
+.depoimento .row:nth-child(1){
+    background-color:#4C6EF5;
+    font-size: 18px;
+    color: white;
+    border-radius: 20px;
+    margin-bottom: 5px;
+}
+div.editar,div.delete,.local{
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+}
+.local{
+    background-color: rgb(73, 101, 214);
+    color: white; 
+}
+.editar{
+    background-color: green;
+    color: white;
+}
+.delete{
+    background-color: red;
+    
+}
+
+/*pagineção*/
+.paginacao{
+    text-align: center;
+    margin: 20px 0;
+}
+.paginacao a{
+    font-size: 14px;
+    margin: 0 8px;
+    display: inline-block;
+    padding: 3px 4px;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    color: #666;
+}
+.paginacao a.pag-select{
+    background-color: rgb(220,220,220);
+}
+/*pagina editar usuario*/
+form#editar-usuario{
+    margin-top: 10px;
+}
+form#editar-usuario label{
+    margin: 10px 2%;
+    width: calc(100% - 4%);
+    padding: 10px;
+   
+}
+/*mini imagem*/
+.mini{
+    width: 60px;
+}
+/*pagina gerenciar Clientes**/
+.box-single-wraper{
+    width: 33.3%;
+    float: left;
+    padding: 20px;
+}
+.box-single{
+    width: 100%;
+    border: 1px solid #CCC;
+    min-height: 330px;
+}
+.box-top{
+    text-align: center;
+    
+    color: #CCC;
+    padding: 8px 0;
+    border-bottom: 1px solid #CCC;
+}
+.box-top h2{
+      font-size: 50px; 
+}
+.box-top img{
+    max-width: 120px;
+    max-height: 70px;
+    margin: 0 auto;
+    display: block;
+}
+.box-body{
+    padding: 10px;
+}
+.box-body p{
+    font-size: 12px;
+    color:black;
+}
+.botao{
+    padding-top: 10px;
+    width: 100%;
+}
+.margem-botao{
+    margin: 10px 0;
+    float: left;
+    width: 100%;
+}
+.busca input[type=text]{
+    width: calc(100% - 200px);
+    float: left;
+    margin-right: 0;
+    margin-top:10px ;
+}
+.busca input[type=submit]{
+    width: 150px;
+    float: left;
+    margin-right: 0;
+
+}
+.busca-result{
+    margin-top: 10px;
+   
+}
+.busca-result p{
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+}
+.btn{
+    width: 95%;
+    border-radius: 20px;
+    margin-left: 2px;
+    padding: 5px;
+}
+a.btn{padding: 5px 10px;
+
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+.pago{
+    background-color: #0288d1;
+}
+.email{
+    background-color: #00897b;
+}
+/*manipulando a imagem*/
+#div-img{
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+   
+}
+
+.box-single-editar{
+    width: 100%;
+    border: 1px solid #CCC;
+    min-height: 220px;
+    float: left;
+}
+
+a.btn-delete{
+margin-bottom: 0;
+
+}
+#ceta-img-left{
+    margin: 90px -50px ;
+    width: 40px;
+    height: 40px;
+    float: left;
+}
+.ceta{
+    background-color: red;
+    cursor: pointer;
+}
+#ceta-img-right{
+    margin: 90px -50px ;
+    width: 40px;
+    height: 40px;
+    float: right;
+}
+/*teste*/
+.nav-galeria{
+	overflow: hidden;
+	width: 100%;
+}
+
+.nav-galeria-wraper{
+    width: 200%;
+    height: 270px;
+    
+}
+
+.nav-galeria-parent{
+	width: 100%;
+	padding:36px;
+	position: relative;
+}
+
+.arrow-left-nav{
+	position: absolute;
+	left: 8px;
+	top: 50%;
+	cursor: pointer;
+	transform:translateY(-50%);
+	-ms-transform:translateY(-50%);
+	background-image:url('../../images/arrow-left.png');
+	background-size: 100% 100%;
+	width: 22px;
+	height: 22px;
+}
+
+
+
+.arrow-right-nav{
+	position: absolute;
+	right: 8px;
+	top: 50%;
+	cursor: pointer;
+	transform:translateY(-50%);
+	-ms-transform:translateY(-50%);
+	background-image:url('../../images/arrow-right.png');
+	background-size: 100% 100%;
+	width: 22px;
+	height: 22px;
+}
+
+.mini-img-wraper{
+	float: left;
+    padding:5px; 
+    margin-left: 5px;   
+    width:calc(33.3% * (100 / 200));
+    height: 245px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.mini-img{
+	width: 100%;
+	cursor: pointer;
+	padding-top:70%;
+	background-position: center;
+	background-size: cover;
+    height: 120px;
+    
+}
+
+.botao{
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+
+@media screen and ( max-width:1200px){
+    .box-container .w33{
+        height: 100px;
+    }
+    .box-single-wraper{
+        width: 100%;
+        min-height: 0;
+    }
+}
+@media screen and (max-width:768px){
+    header{
+        width: 100%;
+        left: 0;
+    }
+    div.conteudo{
+        width: 100%;
+        left: 0;
+    }
+    .box-container .w33{
+        width: 100%;
+        margin-bottom: 10px;
+        height: auto;
+    }
+    .box-single-wraper{
+        width: 100%;
+   }
+}
+@media screen and (max-width:400px){
+    .menu-wraper{
+       width: 200px;
+    }
+}
