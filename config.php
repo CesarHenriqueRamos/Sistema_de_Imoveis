@@ -13,7 +13,7 @@
 	spl_autoload_register($autoload);
 
 
-	define('INCLUDE_PATH','http://localhost/Meus_Projetos/Sistema_de_controle_de_estoque_modulo-5/');
+	define('INCLUDE_PATH','http://localhost/Meus_Projetos/Sistema_de_gest-o_de_im-veis-modulo-6/');
 	define('INCLUDE_PATH_PAINEL',INCLUDE_PATH.'painel/');
 
 	define('BASE_DIR_PAINEL',__DIR__.'/painel');
@@ -23,7 +23,7 @@
 	define('HOST','localhost');
 	define('USER','root');
 	define('PASS','');
-	define('DB','db_controle_estoque');
+	define('DB','db_imoveis');
 
 	//Constantes para o painel de controle
 	define('NOME_EMPRESA','RamosTecnolog');

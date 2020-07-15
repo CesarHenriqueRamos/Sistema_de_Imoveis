@@ -54,11 +54,11 @@
                
             </div><!--boo-usuario-->
             <div class="items-menu">
-                    <h2>Controle Estoque</h2>
-                    <a <?php selecionadoMenu('cadastrar-produtos'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>cadastrar-produtos">Cadastrar Produtos</a>
-                    <a <?php selecionadoMenu('cadastrar-fornecedor'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>cadastrar-fornecedor">Cadastrar Fornecedor</a>
-                    <a <?php selecionadoMenu('visualisar-produtos'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>visualisar-produtos">Visualizar Produtos</a>
-                    <a <?php selecionadoMenu('produtos-em-falta'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>produtos-em-falta">Produtos em Falta</a>
+                    <h2>Gestão de Imoveis</h2>
+                    <a <?php selecionadoMenu('cadastrar-empreendimento'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>cadastrar-empreendimento">Cadastrar Empreendimento</a>
+                    <a <?php selecionadoMenu('cadastrar-imoveis'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>cadastrar-imoveis">Cadastrar Imoveis</a>
+                    <a <?php selecionadoMenu('listar-imoveis'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>listar-imoveis">Listar Imoveis</a>
+                    
                     
         </div>     
         <div class="clear"></div>
