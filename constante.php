@@ -9,7 +9,7 @@ $autoload = function($class){
 };
 
 spl_autoload_register($autoload);
-define('INCLUDE_PATH','http://localhost/Meus_Projetos/Sistema_de_controle_financeiro_modulo-4/');
+define('INCLUDE_PATH','http://localhost/Meus_Projetos/Sistema_de_Imoveis/');
 define('INCLUDE_PATH_PAINEL',INCLUDE_PATH.'painel/');
 
 define('BASE_DIR_PAINEL',__DIR__.'/painel');
@@ -18,6 +18,6 @@ define('BASE_DIR_PAINEL',__DIR__.'/painel');
 define('HOST','localhost');
 define('USER','root');
 define('PASS','');
-define('DB','db_controle_finaceiro');
+define('DB','db_imoveis');
 
 ?>
