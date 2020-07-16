@@ -76,10 +76,9 @@
 <script src="<?php echo INCLUDE_PATH_PAINEL; ?>js/helperMask.js"></script>
 <script src="<?php echo INCLUDE_PATH_PAINEL; ?>js/slider.js"></script>
 <script src="<?php echo INCLUDE_PATH_PAINEL; ?>js/carrocelImagem.js"></script>
-<?php Painel::loadJS(array('clientes.js'),'gerenciar-cliente');?>
+
 <!--novos Plugus-->
 <script src="<?php echo INCLUDE_PATH_PAINEL; ?>js/jquery.maskMoney.js"></script>
 <script  src="https://cdn.jsdelivr.net/npm/zebra_datepicker@latest/dist/zebra_datepicker.min.js"></script>
-<?php Painel::loadJS(array('controleFinanceiro.js'),'cliente-pagamento');?>
 </body>
 </html>

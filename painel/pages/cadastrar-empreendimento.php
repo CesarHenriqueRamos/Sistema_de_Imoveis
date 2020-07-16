@@ -2,12 +2,9 @@
 verificaPermissaoPagina(2);
 if(isset($_POST['acao'])){
     $nome = $_POST['nome'];
-    $descricao = $_POST['descricao'];
-    $altura = $_POST['altura'];
-    $largura = $_POST['largura'];
-    $comprimento = $_POST['comprimento'];
-    $peso = $_POST['peso'];
-    $quantidade = $_POST['quantidade'];
+    $tipo = $_POST['tipo'];
+    $preco = $_POST['preco'];
+
     $imagens = array();
     $imagensForm = count($_FILES['imagens']['name']);
     $sucesso = true;
@@ -30,11 +27,11 @@ if(isset($_POST['acao'])){
             $imagemAtual = ['tmp_name'=> $_FILES['imagens']['tmp_name'][$i], 'name'=>$_FILES['imagens']['name'][$i]];
             $imagens[] = Painel::uploadFile($imagemAtual);
         }
-        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.estoque` VALUES(null,?,?,?,?,?,?,?)");
-        $sql->execute(array($nome,$descricao,$altura,$largura,$comprimento,$peso,$quantidade));
+        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.empreendimentos` VALUES(null,?,?,?)");
+        $sql->execute(array($nome,$tipo,$preco));
             $lastId = MySql::connect()->lastInsertId();
             foreach($imagens as $key => $value){
-                MySql::connect()->exec("INSERT INTO `tb_admin.estoque_imagens` VALUES(null,'$lastId','$value')");
+                MySql::connect()->exec("INSERT INTO `tb_admin.empreendimentos_imagens` VALUES(null,'$lastId','$value')");
             }
             Painel::alert('sucesso','Cadastrado com Sucesso');
         
@@ -60,8 +57,8 @@ if(isset($_POST['acao'])){
             </select>
         </div>
         <div class="box-form" >
-            <label for="preso">Preso:</label>
-            <input type="text" name="preso" id="preso">
+            <label for="preco">Preso:</label>
+            <input type="text" name="preco" id="preco">
         </div>
         
         <div class="box-form" >
