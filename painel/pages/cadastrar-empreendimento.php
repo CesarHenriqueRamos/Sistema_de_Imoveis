@@ -3,7 +3,6 @@ verificaPermissaoPagina(2);
 if(isset($_POST['acao'])){
     $nome = $_POST['nome'];
     $tipo = $_POST['tipo'];
-    $preco = $_POST['preco'];
 
     $imagens = array();
     $imagensForm = count($_FILES['imagens']['name']);
@@ -27,8 +26,8 @@ if(isset($_POST['acao'])){
             $imagemAtual = ['tmp_name'=> $_FILES['imagens']['tmp_name'][$i], 'name'=>$_FILES['imagens']['name'][$i]];
             $imagens[] = Painel::uploadFile($imagemAtual);
         }
-        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.empreendimentos` VALUES(null,?,?,?)");
-        $sql->execute(array($nome,$tipo,$preco));
+        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.empreendimentos` VALUES(null,?,?)");
+        $sql->execute(array($nome,$tipo));
             $lastId = MySql::connect()->lastInsertId();
             foreach($imagens as $key => $value){
                 MySql::connect()->exec("INSERT INTO `tb_admin.empreendimentos_imagens` VALUES(null,'$lastId','$value')");
@@ -55,10 +54,6 @@ if(isset($_POST['acao'])){
                 <option value="residencial">Residencial</option>
                 <option value="comercial">Comercial</option>
             </select>
-        </div>
-        <div class="box-form" >
-            <label for="preco">Preso:</label>
-            <input type="text" name="preco" id="preco">
         </div>
         
         <div class="box-form" >

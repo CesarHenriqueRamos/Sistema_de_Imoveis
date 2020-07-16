@@ -345,7 +345,7 @@ p#cargo{
     border-radius: 20px;
     margin-bottom: 5px;
 }
-div.editar,div.delete,.local{
+div.editar,div.delete,.local,.visualisar{
     cursor: pointer;
     text-align: center;
     border: 1px solid white;
@@ -364,6 +364,9 @@ div.editar,div.delete,.local{
 .delete{
     background-color: red;
     
+}
+.visualisar{
+    background-color:#1976d2;
 }
 
 /*pagineção*/
@@ -406,7 +409,7 @@ form#editar-usuario label{
 .box-single{
     width: 100%;
     border: 1px solid #CCC;
-    min-height: 330px;
+    min-height: 290px;
 }
 .box-top{
     text-align: center;
