@@ -3,18 +3,18 @@ verificaPermissaoPagina(2);
 $id = $_GET['id'];
 if(isset($_GET['imagem'])){
     $idImagem = $_GET['imagem'];
-    $sql = MySql::connect()->prepare("SELECT imagem FROM `tb_admin.imovel_imagem` WHERE id_imovel=?");
+    $sql = MySql::connect()->prepare("SELECT imagem FROM `tb_admin.empreendimentos_imagens` WHERE id=?");
     $sql->execute(array($idImagem));
     $imagem = $sql->fetch()['imagem'];
+    print_r($imagem);
     @unlink('uploads/'.$imagem);
 
-    MySql::connect()->exec("DELETE FROM `tb_admin.imovel_imagem` WHERE id='$idImagem'");
+    MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos_imagens` WHERE id='$idImagem'");
     header('Location: '.INCLUDE_PATH_PAINEL.'editar-imoveis?id='.$id);
 }
 if(isset($_POST['acao'])){
     $nome = $_POST['nome'];
-    $preco = $_POST['preco'];
-    $area = $_POST['area'];
+    $tipo = $_POST['tipo'];
 
     $imagens = array();
     $imagensForm = count($_FILES['imagens']['name']);
@@ -39,11 +39,11 @@ if(isset($_POST['acao'])){
                 $imagens[] = Painel::uploadFile($imagemAtual);
             }
         }
-        $sql = MySql::connect()->prepare("UPDATE `tb_admin.imoveis` SET nome=?,preco=?,area=?WHERE id=?");
-        $sql->execute(array($nome,$preco,$area,$id));
+        $sql = MySql::connect()->prepare("UPDATE `tb_admin.empreendimentos` SET nome=?,tipo=?WHERE id=?");
+        $sql->execute(array($nome,$tipo,$id));
         if($_FILES['imagens']['name'][0] != ''){    
             foreach($imagens as $key => $value){
-                MySql::connect()->exec("INSERT INTO `tb_admin.imovel_imagem` VALUES(null,'$id','$value')");
+                MySql::connect()->exec("INSERT INTO `tb_admin.empreendimentos_imagens` VALUES(null,'$id','$value')");
             }
         }
             Painel::alert('sucesso','Atualizado com Sucesso');
@@ -55,7 +55,7 @@ if(isset($_POST['acao'])){
 <div class="box-container w100" <?php verificaPermissaoMenu(2);?>>
 
 <?php 
- $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imovel_imagem` WHERE id_imovel=?");
+ $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento=?");
  $sql->execute(array($id));
  $imagens = $sql->fetchAll();
  
@@ -94,21 +94,20 @@ if(isset($_POST['acao'])){
 
     <form   method="post"  enctype="multipart/form-data">
     <?php 
-    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis` WHERE id = ?");
+    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos` WHERE id = ?");
     $sql->execute(array($id));
     $dados = $sql->fetch();   
 ?>
         <div class="box-form">
-            <label for="nome">Endereço do Imovel:</label>
+            <label for="nome">Nome do Produto:</label>
             <input type="text" name="nome" id="nome" value="<?php echo $dados['nome'];?>">
         </div>
         <div class="box-form">
-            <label for="npreco">Preço do Imovel:</label>
-            <input type="text" name="preco" id="preco" value="<?php echo $dados['preco'];?>">
-        </div>
-        <div class="box-form">
-            <label for="area">Area do Imovel:</label>
-            <input type="text" name="area" id="area" value="<?php echo $dados['area'];?>">
+            <label for="descricao">Tipo:</label>
+            <select name="tipo" id="">
+                <option <?php if($dados['tipo'] == 'residencial'){ echo 'selected';} ?> value="residencial">Residencial</option>
+                <option <?php if($dados['tipo'] == 'comercial'){ echo 'selected';} ?> value="comercial">Comercial</option>
+            </select>
         </div>        
         <div class="box-form" >
             <label for="img">Imagem:</label>

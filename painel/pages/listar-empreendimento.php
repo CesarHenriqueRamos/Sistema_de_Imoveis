@@ -1,16 +1,34 @@
 <?php 
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento=?");
-$sql->execute(array($id));
-$imagem = $sql->fetchAll();
-foreach($imagem as $key =>$value){
-    @unlink('uploads/'.$value['imagem']);
-}
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento=?");
+    $sql->execute(array($id));
+    $imagem = $sql->fetchAll();
+    foreach($imagem as $key =>$value){
+        @unlink('uploads/'.$value['imagem']);
+    }
 
 
-MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos` WHERE id=$id");
-MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento=$id");
+    MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos` WHERE id=$id");
+    MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento=$id");
+//deletando os imoveis deste impreendimento
+    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis` WHERE id_empreendimento=?");
+    $sql->execute(array($id));
+        $imovel = $sql->fetchAll();
+        print_r($imovel);
+        foreach($imovel as $key => $value){
+            $id = $value['id'];  
+            if(isset($id)){  
+                $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imovel_imagem` WHERE id_imovel=?");
+                $sql->execute(array($value['id']));
+                $imagem = $sql->fetchAll();
+                foreach($imagem as $key =>$value){
+                    @unlink('uploads/'.$value['imagem']);
+                }
+            MySql::connect()->exec("DELETE FROM `tb_admin.imoveis` WHERE id=$id");
+            MySql::connect()->exec("DELETE FROM `tb_admin.imovel_imagem` WHERE id_imovel=$id");   
+        }     
+    }
 }
 
 ?>
@@ -58,11 +76,11 @@ MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos_imagens` WHERE id_
                     <p><b><i class="fa fa-box-open"></i> Tipo:</b> <?php echo $value['tipo']; ?></p>
                     <div class="botao">                    
                         <!--botão de editar-->
-                        <a href="<?php echo INCLUDE_PATH_PAINEL?>editar-imoveis?id=<?php echo $value['id'];?>" class="margem-botao"><div class="col-bt editar"><i class="fas fa-pencil-alt"></i></div><!--col--></a> 
+                        <a href="<?php echo INCLUDE_PATH_PAINEL?>editar-empreendimento?id=<?php echo $value['id'];?>" class="margem-botao"><div class="col-bt editar"><i class="fas fa-pencil-alt"></i></div><!--col--></a> 
                         <!--botão de editar-->
                         <a href="<?php echo INCLUDE_PATH_PAINEL?>visualisar-empreendimento?id=<?php echo $value['id'];?>" class="margem-botao"><div class="col-bt visualisar"><i class="fas fa-eye"></i></div><!--col--></a> 
                         <!--botão de deletar-->                    
-                        <a href="<?php echo INCLUDE_PATH_PAINEL?>listar-imoveis?id=<?php echo $value['id'] ?>" class="margem-botao"><div item_id=<?php echo $value['id'] ?> class="col-bt delete"><i class="fas fa-trash"></i></div><!--col--></a>
+                        <a href="<?php echo INCLUDE_PATH_PAINEL?>listar-empreendimento?id=<?php echo $value['id'] ?>" class="margem-botao"><div item_id=<?php echo $value['id'] ?> class="col-bt delete"><i class="fas fa-trash"></i></div><!--col--></a>
                     </div> <!--botao--> 
                     <!--fim dos botoes-->
                 </div><!--box-body-->                

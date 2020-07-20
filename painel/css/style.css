@@ -423,7 +423,7 @@ form#editar-usuario label{
 }
 .box-top img{
     max-width: 120px;
-    max-height: 70px;
+    height: 70px;
     margin: 0 auto;
     display: block;
 }

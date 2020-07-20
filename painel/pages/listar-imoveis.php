@@ -1,7 +1,7 @@
 <?php 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento=?");
+    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imovel_imagem` WHERE id_imovel=?");
 $sql->execute(array($id));
 $imagem = $sql->fetchAll();
 foreach($imagem as $key =>$value){
@@ -9,8 +9,8 @@ foreach($imagem as $key =>$value){
 }
 
 
-MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos` WHERE id=$id");
-MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento=$id");
+MySql::connect()->exec("DELETE FROM `tb_admin.imoveis` WHERE id=$id");
+MySql::connect()->exec("DELETE FROM `tb_admin.imovel_imagem` WHERE id_imovel=$id");
 }
 
 ?>
@@ -54,13 +54,12 @@ MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos_imagens` WHERE id_
                     <img src="<?php echo INCLUDE_PATH_PAINEL ?>uploads/<?php echo $imagem['imagem'] ?>" alt="">
                 </div><!--box-top-->
                 <div class="box-body">
-                    <p><b><i class="fa fa-box-open"></i> Nome:</b> <?php echo $value['nome'] ?></p>
-                    <p><b><i class="fa fa-box-open"></i> Tipo:</b> <?php echo $value['tipo']; ?></p>
+                    <p><b><i class="fa fa-box-open"></i> Endereço:</b> <?php echo $value['nome'] ?></p>
+                    <p><b><i class="fa fa-box-open"></i> Valor:</b> <?php echo $value['preco']; ?></p>
+                    <p><b><i class="fa fa-box-open"></i> Area:</b> <?php echo $value['area']; ?></p>
                     <div class="botao">                    
                         <!--botão de editar-->
                         <a href="<?php echo INCLUDE_PATH_PAINEL?>editar-imoveis?id=<?php echo $value['id'];?>" class="margem-botao"><div class="col-bt editar"><i class="fas fa-pencil-alt"></i></div><!--col--></a> 
-                        <!--botão de editar-->
-                        <a href="<?php echo INCLUDE_PATH_PAINEL?>visualisar-empreendimento?id=<?php echo $value['id'];?>" class="margem-botao"><div class="col-bt visualisar"><i class="fas fa-eye"></i></div><!--col--></a> 
                         <!--botão de deletar-->                    
                         <a href="<?php echo INCLUDE_PATH_PAINEL?>listar-imoveis?id=<?php echo $value['id'] ?>" class="margem-botao"><div item_id=<?php echo $value['id'] ?> class="col-bt delete"><i class="fas fa-trash"></i></div><!--col--></a>
                     </div> <!--botao--> 

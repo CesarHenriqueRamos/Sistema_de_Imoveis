@@ -47,7 +47,7 @@ if(isset($_POST['acao'])){
 
     <form   method="post"  enctype="multipart/form-data">
         <div class="box-form">
-            <label for="nome">Nome:</label>
+            <label for="nome">Endereço do imovel:</label>
             <input type="text" name="nome" id="nome">
         </div>
         <div class="box-form">
