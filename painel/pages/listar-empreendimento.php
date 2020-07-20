@@ -37,14 +37,14 @@ MySql::connect()->exec("DELETE FROM `tb_admin.empreendimentos_imagens` WHERE id_
         $query = " WHERE nome LIKE '%$busca%' OR tipo LIKE '%$busca%'";
        // $clientes = MySql::connect()->prepare("SELECT * FROM `$tabela` $query");
         }  
-      $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis` $query ORDER BY id DESC");
+      $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos` $query ORDER BY id DESC");
        $sql->execute();     
        $produtos = $sql->fetchAll();        
         if(isset($_POST['pesquisa'])){
             echo '<div class="busca-result"><p>Foram Encontrados '.count($produtos).' Resultado</p></div>';   
         }
         foreach($produtos as $key => $value){
-        $sql = MySql::connect()->prepare("SELECT imagem FROM `tb_admin.imovel_imagem` WHERE id_imovel = ?");
+        $sql = MySql::connect()->prepare("SELECT imagem FROM `tb_admin.empreendimentos_imagens` WHERE id_empreendimento = ?");
         $sql->execute(array($value['id']));
         $imagem = $sql->fetch();
     ?>
