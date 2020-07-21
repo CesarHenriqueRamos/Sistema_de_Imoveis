@@ -74,7 +74,7 @@ body{
 
 /*header*/
 header{
-    background-color: rgb(35, 10, 88);
+    background-color: #0d47a1;
     padding: 10px;
     height: 60px;
    
@@ -143,71 +143,102 @@ nav.mobile a{
     color: white;
     cursor: pointer;
 }
-/*banner*/
-section.banner-container{
-	background-image: url('../images/banner.jpg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+/*home*/
+section.busca{
+    background-color: #1976d2;
     height: calc(100% - 60px);
-    min-height: 600px;
+    min-height: 200px;
     width: 100%;
     position: relative;
 }
-
-.banner-single{
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 1;
-	width: 100%;
-	height:100%;
-	opacity: 0;
-	background-size: cover;
-	background-position: center;
-}
-section.banner-container form{
-	width: 93%;
-	max-width: 600px;
-	z-index: 3;
-	position: absolute;
-	left: 50%;
-	top:50%;
-	transform:translate(-50%,-50%);
-	-ms-transform:translate(-50%,-50%);
-}
-section.banner-container form h2{
-    text-align: center;
-    color: rgb(35, 10, 88);
-    margin-bottom: 10px;
-    z-index: 2;
-}
-section.banner-container form input[type=email]{
-	width: 400px;
-    padding: 10px 10px;
-    border: 0;
-    border-radius: 20px;
-}
-
-section.banner-container form input[type=submit]{
-	width: 80px;    
-    padding: 10px 10px;
-    border-radius: 20px;
-    border: 0;
-    background-color: #5E3EA1;
-    color: white;
-    cursor: pointer;
-}
-section.banner-container div.overlay{
-    position: absolute;
-    top: 0;
-    left: 0;
+.busca form{
     width: 100%;
-    height:calc(100% - 60px) ;
-    min-height: 600px;
-    background-color: black;
-    opacity: 0.3;
-    z-index: 1;
+}
+.busca form .box-form{
+    float: left;
+    margin-top: 20px;
+
+}
+.busca form .box-form label{
+    color: white;
+    width: 100%;
+}
+.busca form .box-form input{
+    width: 95%;
+    padding: 5px;
+    border-radius: 20px;
+    margin-top: 9px;
+    border: none;
+    
+}
+.busca form .box-form select{
+    width: 95%;
+    padding: 5px;
+    border-radius: 20px;
+    margin-top: 7px;
+    border: none;
+}
+.busca form .box-form input[type=button]{
+    width: 40%;
+    margin-right: 15px;
+}
+.busca form .box-form input[type=submit]{
+   margin-top: 30px;
+   background-color: #fb8c00;
+   color: white;
+   padding: 5px;
+}
+/*imovel*/
+div.imovel-single{
+    width: 100%;
+    border: 2px solid #ccc;
+    float: left;
+    border-radius: 20px;
+    margin: 25px 0;
+    padding: 15px 0;
+    background-color: rgb(245, 245, 245);
+}
+div.imagem-imovel{
+    width: 40%;
+    
+    float: left;
+}
+div.imagem-imovel img{
+    width: 100%;
+    max-height: 280px;
+    padding: 0 10px;
+    border-radius: 30px;
+}
+
+div.dados-imovel{
+    width: 60%;
+    float: left;
+}
+div.dados-imovel h2 a{
+    color: #0d47a1;
+    text-decoration: none;
+}
+div.dados-imovel h3{
+    color: #3078e2;
+    margin-top: 7px;
+}
+div.dados-imovel p{
+    margin-top: 7px;
+    color: rgb(141, 141, 141);
+}
+/*temporario*/
+.btn-selecionado{
+    background-color: #00c853;
+    color: white;
+}
+div.dados-imovel button{
+   color: white;
+   width: 200px;
+   background-color: #fb8c00;
+   padding: 10px 25px;
+   border: 0;
+   border-radius: 20px;
+   margin-top: 10px;
 }
 /*descrivcao-autor*/
 section.descricao-autor{
@@ -298,7 +329,7 @@ h3.depoimento-altor{
 }
 /*footer*/
 footer{
-    background-color: rgb(35, 10, 88);
+    background-color: #0d47a1;
     text-align: center;
     color: white;
     padding: 10px 0;

@@ -13,8 +13,10 @@ if(isset($_GET['imagem'])){
 }
 if(isset($_POST['acao'])){
     $nome = $_POST['nome'];
-    $preco = $_POST['preco'];
+    $valor = str_replace('.','',$_POST['preco']);
+    $valor = str_replace(',','.', $valor);
     $area = $_POST['area'];
+    $tipo = $_POST['tipo'];
 
     $imagens = array();
     $imagensForm = count($_FILES['imagens']['name']);
@@ -39,8 +41,8 @@ if(isset($_POST['acao'])){
                 $imagens[] = Painel::uploadFile($imagemAtual);
             }
         }
-        $sql = MySql::connect()->prepare("UPDATE `tb_admin.imoveis` SET nome=?,preco=?,area=?WHERE id=?");
-        $sql->execute(array($nome,$preco,$area,$id));
+        $sql = MySql::connect()->prepare("UPDATE `tb_admin.imoveis` SET nome=?,preco=?,area=?,tipo=? WHERE id=?");
+        $sql->execute(array($nome,$valor,$area,$tipo,$id));
         if($_FILES['imagens']['name'][0] != ''){    
             foreach($imagens as $key => $value){
                 MySql::connect()->exec("INSERT INTO `tb_admin.imovel_imagem` VALUES(null,'$id','$value')");
@@ -104,12 +106,19 @@ if(isset($_POST['acao'])){
         </div>
         <div class="box-form">
             <label for="npreco">Preço do Imovel:</label>
-            <input type="text" name="preco" id="preco" value="<?php echo $dados['preco'];?>">
+            <input type="text" name="preco" id="preco" value="<?php echo number_format($dados['preco'],2,',','.'); ?>">
         </div>
         <div class="box-form">
             <label for="area">Area do Imovel:</label>
             <input type="text" name="area" id="area" value="<?php echo $dados['area'];?>">
-        </div>        
+        </div> 
+        <div class="box-form">
+            <label for="area">Tipo:</label>
+            <select name="tipo" id="">
+                <option <?php if($dados['tipo'] == 'Comprar'){echo 'selected';} ?> value="Comprar">Comprar</option>
+                <option <?php if($dados['tipo'] == 'Alugar'){echo 'selected';} ?> value="Alugar">Alugar</option>
+            </select>
+        </div>       
         <div class="box-form" >
             <label for="img">Imagem:</label>
             <input multiple type="file" name="imagens[]" id="img">

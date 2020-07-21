@@ -3,8 +3,10 @@ verificaPermissaoPagina(2);
 if(isset($_POST['acao'])){
     $nome = $_POST['nome'];
     $empreendimento = $_POST['empreendimento'];
-    $valor = $_POST['preco'];
+    $valor = str_replace('.','',$_POST['preco']);
+    $valor = str_replace(',','.', $valor);
     $area = $_POST['area'];
+    $tipo = $_POST['tipo'];
 
     $imagens = array();
     $imagensForm = count($_FILES['imagens']['name']);
@@ -28,8 +30,8 @@ if(isset($_POST['acao'])){
             $imagemAtual = ['tmp_name'=> $_FILES['imagens']['tmp_name'][$i], 'name'=>$_FILES['imagens']['name'][$i]];
             $imagens[] = Painel::uploadFile($imagemAtual);
         }
-        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.imoveis` VALUES(null,?,?,?,?)");
-        $sql->execute(array($empreendimento,$nome,$valor,$area));
+        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.imoveis` VALUES(null,?,?,?,?,?)");
+        $sql->execute(array($empreendimento,$nome,$valor,$area,$tipo));
             $lastId = MySql::connect()->lastInsertId();
             foreach($imagens as $key => $value){
                 MySql::connect()->exec("INSERT INTO `tb_admin.imovel_imagem` VALUES(null,'$lastId','$value')");
@@ -72,6 +74,13 @@ if(isset($_POST['acao'])){
         <div class="box-form">
             <label for="area">Área:</label>
             <input type="number" name="area" id="area">
+        </div>
+        <div class="box-form">
+            <label for="area">Tipo:</label>
+            <select name="tipo" id="">
+                <option value="Comprar">Comprar</option>
+                <option value="Alugar">Alugar</option>
+            </select>
         </div>
         <div class="box-form" >
             <label for="img">Imagem:</label>

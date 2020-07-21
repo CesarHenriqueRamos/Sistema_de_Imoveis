@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 	<link href="<?php echo INCLUDE_PATH; ?>estilo/style.css" rel="stylesheet" />
     <link rel="icon" href="<?php echo INCLUDE_PATH; ?>favicon.ico" type="image/x-icon" />
-    <title>Site Dinamico</title>
+    <title>Site de Imóveis</title>
 </head>
 <body>
 
@@ -29,20 +29,13 @@
 				break;
 		}
     ?>
-    <!--componentes de mensagem e load-->
-    <div class="sucesso">Formulário Enviado com Sucesso!</div>
-    <div class="erro">Erro ao Enviar o Formulário</div>
-	<div class="overlay-loading">
-		<img src="<?php echo INCLUDE_PATH ?>images/ajax-loader.gif" />
-	</div><!--overlay-loading-->
 	<header>
 		<div class="container">
-			<div class="logo left"><a href="/">RamosTecnolog</a></div><!--logo-->
+			<div class="logo left"><a href="/">Site de Imóveis</a></div><!--logo-->
 			<nav class="desktop right">
 				<ul>
 					<li><a href="<?php echo INCLUDE_PATH; ?>">Home</a></li>
 					<li><a href="<?php echo INCLUDE_PATH; ?>sobre">Sobre</a></li>
-					<li><a href="<?php echo INCLUDE_PATH; ?>servicos">Serviços</a></li>
 					<li><a realtime="contato" href="<?php echo INCLUDE_PATH; ?>contato">Contato</a></li>
 				</ul>
 			</nav>
