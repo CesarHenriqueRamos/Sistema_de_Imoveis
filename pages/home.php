@@ -1,42 +1,94 @@
+<?php 
+$preco = '';
+$area = "";
+$cidade = "";
+$tipo = '';
+$acao = '';
+if(@$_POST['pesquisar']){
+    //print_r($_POST);
+    $preco = @$_POST['preco'];
+    $area = @$_POST['area'];
+    $cidade = @$_POST['cidade'];
+    $tipo = @$_POST['tipo'];
+    $acao = @$_POST['acao'];
+    $query ="";
+    if($cidade != ''){
+        $query = $query." cidade = '$cidade'";
+    }
+    if($area != ''){
+        $query = $query." && area <= '$area'";
+    }
+    if($preco != ''){
+        $query = $query." && preco <= '$preco'";
+    }
+    if($acao != ''){
+        $query = $query." && tipo = '$acao'";
+    }       
+    //echo $query;
+    /*if($tipo != ''){
+        $query = $query." && tipo = '$tipo'";
+    }*/
+    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis` WHERE $query");
+    $sql->execute();
+    $dados = $sql->fetchAll();
+}else{
+    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis`");
+    $sql->execute();
+    $dados = $sql->fetchAll();  
+}      
+
+?>
 <section class="busca">
     <div class="container">
+        
         <form action="" method="post">
         <div class="box-form w33">
                 <label for="preco">O que você precisa?</label>
                 <br>
-                <input class="btn-selecionado" type="button" value="Comprar">
-                <input type="button" value="Alugar">
+                <select name="acao" style="color:#1b5e20;background-color: #00e676; ">
+                    <option <?php if($acao == 'comprar') echo 'selected' ?> value="comprar"> Comprar</option>
+                    <option <?php if($acao == 'alugar') echo 'selected' ?> value="alugar"> Alugar</option>
+                </select>
             </div>
             <div class="box-form w33">
                 <label for="preco">Qual Tipo?</label>
-                <select>
-                    <option value="residencial"> Residencial</option>
-                    <option value="comercial"> Comercial</option>
+                <select name="tipo">
+                    <option value=""></option>
+                    <option <?php if($tipo == 'residencial') echo 'selected' ?> value="residencial"> Residencial</option>
+                    <option <?php if($tipo == 'comercial') echo 'selected' ?> value="comercial"> Comercial</option>
                 </select>
             </div>
             <div class="box-form w33">
                 <label for="preco">Onde?</label>
-                <input type="text" name="preco" id="preco">
+                <select name="cidade">
+                    <option <?php if($cidade == 'Blumenau') echo 'selected'; ?> value="Blumenau"> Blumenau</option>
+                    <option <?php if($cidade == 'Florianopolis') echo 'selected' ;?> value="Florianopolis"> Florianopolis</option>
+                    
+                </select>
             </div>
             <div class="box-form w33">
                 <label for="preco">Faicha de Preço?</label>
-                <select>
-                    <option value="100.000,00"> até 100.000,00</option>
-                    <option value="200.000,00"> até 200.000,00</option>
-                    <option value="300.000,00"> até 300.000,00</option>
-                    <option value="400.000,00"> até 400.000,00</option>
-                    <option value="500.000,00"> até 500.000,00</option>
+                <select name="preco">
+                    <option value=""></option>
+                    <option <?php if($preco == '100.000,00') echo 'selected' ?> value="100.000,00"> até 100.000,00</option>
+                    <option <?php if($preco == '200.000,00') echo 'selected' ?> value="200.000,00"> até 200.000,00</option>
+                    <option <?php if($preco == '300.000,00') echo 'selected' ?> value="300.000,00"> até 300.000,00</option>
+                    <option <?php if($preco == '400.000,00') echo 'selected' ?> value="400.000,00"> até 400.000,00</option>
+                    <option <?php if($preco == '500.000,00') echo 'selected' ?> value="500.000,00"> até 500.000,00</option>
                 </select>
             </div>
             <div class="box-form w33">
                 <label for="preco">Área?</label>
-                <select>
-                    <option value="50"> até 50m²</option>
-                    <option value="100"> até 100m²</option>
+                <select name="area">
+                    <option value=""></option>
+                    <option <?php if($area == '50') echo 'selected' ?> value="50"> até 50m²</option>
+                    <option <?php if($area == '100') echo 'selected' ?> value="100"> até 100m²</option>
+                    <option <?php if($area == '150') echo 'selected' ?> value="150"> até 150m²</option>
+                    <option <?php if($area == '200') echo 'selected' ?> value="200"> até 200m²</option>
                 </select>
             </div>
             <div class="box-form w33">
-               <input type="submit" value="Pesquisar">
+               <input type="submit" name="pesquisar" value="Pesquisar">
         </form>
         <div class="clear"></div>
     </div><!--container-->
@@ -44,9 +96,7 @@
 <section class="imoveis">
     <div class="container">
         <?php
-            $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis`");
-            $sql->execute();
-            $dados = $sql->fetchAll();        
+        
             foreach($dados as $key => $value){
                 $id = $value['id_empreendimento'];
                 $imovel = $value['id'];

@@ -149,7 +149,7 @@ section.busca{
     height: calc(100% - 60px);
     min-height: 200px;
     width: 100%;
-    position: relative;
+    
 }
 .busca form{
     width: 100%;
@@ -177,16 +177,19 @@ section.busca{
     border-radius: 20px;
     margin-top: 7px;
     border: none;
+    font-size: 18px;
 }
 .busca form .box-form input[type=button]{
     width: 40%;
     margin-right: 15px;
 }
-.busca form .box-form input[type=submit]{
+/*.busca */form .box-form input[type=submit]{
    margin-top: 30px;
    background-color: #fb8c00;
    color: white;
    padding: 5px;
+   cursor: pointer;
+   font-size: 18px;
 }
 /*imovel*/
 div.imovel-single{
@@ -471,6 +474,7 @@ span.active-slider{
         width: 300px;
         margin-top: 10px;
         margin-left: 10%;
+        cursor: pointer;
     }
     section.banner-container form input[type=email]{
         width: 300px;
