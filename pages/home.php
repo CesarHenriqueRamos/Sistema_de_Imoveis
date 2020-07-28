@@ -24,13 +24,16 @@ if(@$_POST['pesquisar']){
     if($acao != ''){
         $query = $query." && tipo = '$acao'";
     }       
-    //echo $query;
-    /*if($tipo != ''){
-        $query = $query." && tipo = '$tipo'";
-    }*/
-    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis` WHERE $query");
-    $sql->execute();
-    $dados = $sql->fetchAll();
+    
+    if($tipo != ''){
+        $query = $query." && comercial_residencial = '$tipo'";
+    }
+        $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis` WHERE $query");
+        $sql->execute();
+        $dados = $sql->fetchAll();
+      
+        //echo $query;
+    
 }else{
     $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis`");
     $sql->execute();
