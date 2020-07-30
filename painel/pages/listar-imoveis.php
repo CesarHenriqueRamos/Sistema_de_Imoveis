@@ -54,8 +54,8 @@ MySql::connect()->exec("DELETE FROM `tb_admin.imovel_imagem` WHERE id_imovel=$id
                     <img src="<?php echo INCLUDE_PATH_PAINEL ?>uploads/<?php echo $imagem['imagem'] ?>" alt="">
                 </div><!--box-top-->
                 <div class="box-body">
-                    <p><b><i class="fa fa-box-open"></i> Endereço:</b> <?php echo $value['nome'] ?></p>
-                    <p><b><i class="fa fa-box-open"></i> Valor:</b> <?php echo number_format($value['preco'],2,',','.'); ?></p>
+                    <p><b><i class="fa fa-box-open"></i> Endereço:</b> <?php echo $value['endereco'] ?></p>
+                    <p><b><i class="fa fa-box-open"></i> Valor:</b> <?php echo number_format($value['valor'],2,',','.'); ?></p>
                     <p><b><i class="fa fa-box-open"></i> Area:</b> <?php echo $value['area']; ?></p>
                     <div class="botao">                    
                         <!--botão de editar-->

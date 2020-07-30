@@ -23,7 +23,7 @@
 	define('HOST','localhost');
 	define('USER','root');
 	define('PASS','');
-	define('DB','db_imoveis');
+	define('DB','db_imovel');
 
 	//Constantes para o painel de controle
 	define('NOME_EMPRESA','RamosTecnolog');

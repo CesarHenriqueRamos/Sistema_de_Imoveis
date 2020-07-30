@@ -55,9 +55,8 @@
             </div><!--boo-usuario-->
             <div class="items-menu">
                     <h2>Gestão de Imoveis</h2>
-                    <a <?php selecionadoMenu('cadastrar-empreendimento'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>cadastrar-empreendimento">Cadastrar Empreendimento</a>
+                    <a <?php selecionadoMenu('cadastrar-cidade'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>cadastrar-cidade">Cadastrar Cidades</a>
                     <a <?php selecionadoMenu('cadastrar-imoveis'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>cadastrar-imoveis">Cadastrar Imoveis</a>
-                    <a <?php selecionadoMenu('listar-empreendimento'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>listar-empreendimento">Listar Empreendimento</a>
                     <a <?php selecionadoMenu('listar-imoveis'); ?> href="<?php echo INCLUDE_PATH_PAINEL?>listar-imoveis">Listar Imoveis</a>
                     
                     

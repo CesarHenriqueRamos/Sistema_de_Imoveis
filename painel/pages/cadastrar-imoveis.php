@@ -1,12 +1,15 @@
 <?php 
 verificaPermissaoPagina(2);
 if(isset($_POST['acao'])){
-    $nome = $_POST['nome'];
-    $empreendimento = $_POST['empreendimento'];
-    $valor = str_replace('.','',$_POST['preco']);
+    $endereco = $_POST['endereco'];
+    $quartos = (int)$_POST['quartos'];
+    $vagas = (int)$_POST['vagas'];
+    $valor = str_replace('.','',$_POST['valor']);
     $valor = str_replace(',','.', $valor);
     $area = $_POST['area'];
-    $tipo = $_POST['tipo'];
+    $alugar_vender = $_POST['alugar_vender'];
+    $cidade = $_POST['cidade'];
+    $comercial_residencial = $_POST['comercial_residencial'];
 
     $imagens = array();
     $imagensForm = count($_FILES['imagens']['name']);
@@ -30,8 +33,8 @@ if(isset($_POST['acao'])){
             $imagemAtual = ['tmp_name'=> $_FILES['imagens']['tmp_name'][$i], 'name'=>$_FILES['imagens']['name'][$i]];
             $imagens[] = Painel::uploadFile($imagemAtual);
         }
-        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.imoveis` VALUES(null,?,?,?,?,?)");
-        $sql->execute(array($empreendimento,$nome,$valor,$area,$tipo));
+        $sql = MySql::connect()->prepare("INSERT INTO `tb_admin.imoveis` VALUES(null,?,?,?,?,?,?,?,?)");
+        $sql->execute(array($endereco,$quartos,$vagas,$valor,$area,$alugar_vender,$cidade,$comercial_residencial));
             $lastId = MySql::connect()->lastInsertId();
             foreach($imagens as $key => $value){
                 MySql::connect()->exec("INSERT INTO `tb_admin.imovel_imagem` VALUES(null,'$lastId','$value')");
@@ -49,37 +52,62 @@ if(isset($_POST['acao'])){
 
     <form   method="post"  enctype="multipart/form-data">
         <div class="box-form">
-            <label for="nome">Endereço do imovel:</label>
-            <input type="text" name="nome" id="nome">
+            <label for="endereco">Endereço do imovel:</label>
+            <input type="text" name="endereco" id="endereco">
         </div>
         <div class="box-form">
-            <label for="descricao">Empreendimento:</label>
-            <select name="empreendimento" id="">
+            <label for="quartos">Quantidade de Quartos:</label>
+            <select name="quartos" id="">
             <?php
-                $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos`");
-                $sql->execute();
-                $dados = $sql->fetchAll();
-                
-                foreach($dados as $key => $value){
-                    echo $value['id'];
+               for($i = 0; $i <= 10; $i++){
             ?>
-                <option value="<?php echo $value['id'];?>"><?php echo $value['nome'];?></option>
+                <option value="<?php echo $i;?>"><?php echo $i;?></option>
             <?php } ?>
             </select>
         </div>
         <div class="box-form">
-            <label for="preco">Preço:</label>
-            <input type="text" name="preco" id="preco">
+            <label for="quartos">Quantidade de Vagas:</label>
+            <select name="vagas" id="">
+            <?php
+               for($i = 0; $i <= 10; $i++){
+            ?>
+                <option value="<?php echo $i;?>"><?php echo $i;?></option>
+            <?php } ?>
+            </select>
+        </div>
+        <div class="box-form">
+            <label for="valor">Valor do Imovel:</label>
+            <input type="text" name="valor" id="valor">
         </div>
         <div class="box-form">
             <label for="area">Área:</label>
             <input type="number" name="area" id="area">
         </div>
         <div class="box-form">
-            <label for="area">Tipo:</label>
-            <select name="tipo" id="">
+            <label for="alugar_vender">Alugar ou Vender? </label>
+            <select name="alugar_vender" id="alugar_vender">
                 <option value="Comprar">Comprar</option>
                 <option value="Alugar">Alugar</option>
+            </select>
+        </div>
+        <div class="box-form">
+            <label for="comercial_residencial">Alugar ou Vender? </label>
+            <select name="comercial_residencial" id="comercial_residencial">
+                <option value="Comercial">Comercial</option>
+                <option value="Residencial">Residencial</option>
+            </select>
+        </div>
+        <div class="box-form">
+            <label for="cidade">Cidade:</label>
+            <select name="cidade" id="cidade">
+            <?php 
+                $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin_cidade`");
+                $sql->execute();
+                $dados = $sql->fetchAll();
+                foreach($dados as $key => $value){
+            ?>
+                <option value="<?php echo $value['nome'];?>"><?php echo $value['nome'];?></option>
+            <?php } ?>
             </select>
         </div>
         <div class="box-form" >

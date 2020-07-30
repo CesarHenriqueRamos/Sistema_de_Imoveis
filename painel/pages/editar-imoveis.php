@@ -12,11 +12,15 @@ if(isset($_GET['imagem'])){
     header('Location: '.INCLUDE_PATH_PAINEL.'editar-imoveis?id='.$id);
 }
 if(isset($_POST['acao'])){
-    $nome = $_POST['nome'];
-    $valor = str_replace('.','',$_POST['preco']);
+    $endereco = $_POST['endereco'];
+    $quartos = (int)$_POST['quartos'];
+    $vagas = (int)$_POST['vagas'];
+    $valor = str_replace('.','',$_POST['valor']);
     $valor = str_replace(',','.', $valor);
     $area = $_POST['area'];
-    $tipo = $_POST['tipo'];
+    $alugar_vender = $_POST['alugar_vender'];
+    $cidade = $_POST['cidade'];
+    $comercial_residencial = $_POST['comercial_residencial'];
 
     $imagens = array();
     $imagensForm = count($_FILES['imagens']['name']);
@@ -41,8 +45,8 @@ if(isset($_POST['acao'])){
                 $imagens[] = Painel::uploadFile($imagemAtual);
             }
         }
-        $sql = MySql::connect()->prepare("UPDATE `tb_admin.imoveis` SET nome=?,preco=?,area=?,tipo=? WHERE id=?");
-        $sql->execute(array($nome,$valor,$area,$tipo,$id));
+        $sql = MySql::connect()->prepare("UPDATE `tb_admin.imoveis` SET endereco=?,quartos=?,vagas=?,valor=?,area=?,alugar_vender=?,cidade=?,comercial_residencial=? WHERE id=?");
+        $sql->execute(array($endereco,$quartos,$vagas,$valor,$area,$alugar_vender,$cidade,$comercial_residencial,$id));
         if($_FILES['imagens']['name'][0] != ''){    
             foreach($imagens as $key => $value){
                 MySql::connect()->exec("INSERT INTO `tb_admin.imovel_imagem` VALUES(null,'$id','$value')");
@@ -98,32 +102,72 @@ if(isset($_POST['acao'])){
     <?php 
     $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imoveis` WHERE id = ?");
     $sql->execute(array($id));
-    $dados = $sql->fetch();   
+    $dados = $sql->fetch();  
 ?>
         <div class="box-form">
-            <label for="nome">Endereço do Imovel:</label>
-            <input type="text" name="nome" id="nome" value="<?php echo $dados['nome'];?>">
+            <label for="endereco">Endereço do imovel:</label>
+            <input type="text" name="endereco" id="endereco" value="<?php echo $dados['endereco'];?>">
         </div>
         <div class="box-form">
-            <label for="npreco">Preço do Imovel:</label>
-            <input type="text" name="preco" id="preco" value="<?php echo number_format($dados['preco'],2,',','.'); ?>">
-        </div>
-        <div class="box-form">
-            <label for="area">Area do Imovel:</label>
-            <input type="text" name="area" id="area" value="<?php echo $dados['area'];?>">
-        </div> 
-        <div class="box-form">
-            <label for="area">Tipo:</label>
-            <select name="tipo" id="">
-                <option <?php if($dados['tipo'] == 'Comprar'){echo 'selected';} ?> value="Comprar">Comprar</option>
-                <option <?php if($dados['tipo'] == 'Alugar'){echo 'selected';} ?> value="Alugar">Alugar</option>
+            <label for="quartos">Quantidade de Quartos:</label>
+            <select name="quartos" id="">
+            <?php
+               for($i = 0; $i <= 10; $i++){
+            ?>
+                <option <?php if($dados['quartos'] == $i) echo 'selected' ?> value="<?php echo $i;?>"><?php echo $i;?></option>
+            <?php } ?>
             </select>
-        </div>       
+        </div>
+        <div class="box-form">
+            <label for="quartos">Quantidade de Vagas:</label>
+            <select name="vagas" id="">
+            <?php
+               for($i = 0; $i <= 10; $i++){
+            ?>
+                <option <?php if($dados['vagas'] == $i) echo 'selected' ?> value="<?php echo $i;?>"><?php echo $i;?></option>
+            <?php } ?>
+            </select>
+        </div>
+        <div class="box-form">
+            <label for="valor">Valor do Imovel:</label>
+            <input type="text" name="valor" id="valor" value="<?php echo $dados['valor'];?>">
+        </div>
+        <div class="box-form">
+            <label for="area">Área:</label>
+            <input type="number" name="area" id="area" value="<?php echo $dados['area'];?>">
+        </div>
+        <div class="box-form">
+            <label for="alugar_vender">Alugar ou Vender? </label>
+            <select name="alugar_vender" id="alugar_vender">
+                <option <?php if($dados['valor'] == 'Comprar') echo 'selected' ?> value="Comprar">Comprar</option>
+                <option <?php if($dados['valor'] == 'Alugar') echo 'selected' ?> value="Alugar">Alugar</option>
+            </select>
+        </div>
+        <div class="box-form">
+            <label for="comercial_residencial">Alugar ou Vender? </label>
+            <select name="comercial_residencial" id="comercial_residencial">
+                <option value="Comercial">Comercial</option>
+                <option value="Residencial">Residencial</option>
+            </select>
+        </div>
+        <div class="box-form">
+            <label for="cidade">Cidade:</label>
+            <select name="cidade" id="cidade">
+            <?php 
+                $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin_cidade`");
+                $sql->execute();
+                $dado = $sql->fetchAll();
+                foreach($dado as $key => $value){
+            ?>
+                <option <?php if($dados['cidade'] == $value['nome']) echo 'selected' ?> value="<?php echo $value['nome'];?>"><?php echo $value['nome'];?></option>
+            <?php } ?>
+            </select>
+        </div>
         <div class="box-form" >
             <label for="img">Imagem:</label>
             <input multiple type="file" name="imagens[]" id="img">
         </div>
-        <div class="box-form" style="100%; float:left;">            
+        <div class="box-form">            
             <input type="submit" name="acao" value="Atualizar">
         </div>
         <div class="clear"></div>

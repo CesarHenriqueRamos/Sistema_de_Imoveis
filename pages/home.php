@@ -19,10 +19,10 @@ if(@$_POST['pesquisar']){
         $query = $query." && area <= '$area'";
     }
     if($preco != ''){
-        $query = $query." && preco <= '$preco'";
+        $query = $query." && valor <= '$preco'";
     }
     if($acao != ''){
-        $query = $query." && tipo = '$acao'";
+        $query = $query." && alugar_vender = '$acao'";
     }       
     
     if($tipo != ''){
@@ -64,8 +64,15 @@ if(@$_POST['pesquisar']){
             <div class="box-form w33">
                 <label for="preco">Onde?</label>
                 <select name="cidade">
-                    <option <?php if($cidade == 'Blumenau') echo 'selected'; ?> value="Blumenau"> Blumenau</option>
-                    <option <?php if($cidade == 'Florianopolis') echo 'selected' ;?> value="Florianopolis"> Florianopolis</option>
+                <?php
+                    $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin_cidade`");
+                    $sql->execute();
+                    $cidade = $sql->fetchAll();
+                    foreach($cidade as $key => $value){
+                ?>
+                    <option <?php if($cidade == $value['nome']) echo 'selected'; ?> value="<?php echo $value['nome'];?>"> <?php echo $value['nome'];?></option>
+                    <?php } ?>
+                    
                     
                 </select>
             </div>
@@ -101,11 +108,7 @@ if(@$_POST['pesquisar']){
         <?php
         
             foreach($dados as $key => $value){
-                $id = $value['id_empreendimento'];
                 $imovel = $value['id'];
-                $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.empreendimentos` WHERE id = ?");
-                $sql->execute(array($id));
-                $empreendimento = $sql->fetch();  
                 $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin.imovel_imagem` WHERE id_imovel = ?");
                 $sql->execute(array($imovel));
                 $imagem_imovel = $sql->fetch();  
@@ -116,11 +119,17 @@ if(@$_POST['pesquisar']){
             </div>
             <div class="dados-imovel">
                 <div class="w50">
-                    <h2><a href=""><?php echo $empreendimento['nome']; ?></a></h2>
-                    <h3><?php echo $value['nome']; ?></h3>
-                    <p>Valor: R$ <?php echo number_format($value['preco'],2,',','.'); ?></p>
+                    <h2><a href=""><?php echo $value['endereco']; ?></a></h2>
+                    <h3><?php echo $value['cidade']; ?></h3>
+                    <p>Valor: R$ <?php echo number_format($value['valor'],2,',','.'); ?></p>
                     <p>Área: <?php echo $value['area']; ?>m²</p>
-                    <p>Tipo: <?php echo $value['tipo']; ?></p>
+                    <p>Tipo: <?php echo $value['comercial_residencial']; ?></p>
+                    <div class="w50">
+                        <p>Quartos: <?php echo $value['quartos']; ?></p>
+                    </div>
+                    <div class="w50">
+                        <p>Vagas: <?php echo $value['vagas']; ?></p>
+                    </div>
                 </div>
                 <div class="w50">
                     <h2>Contato:</h2>

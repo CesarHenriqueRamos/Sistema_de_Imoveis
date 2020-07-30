@@ -1,7 +1,7 @@
 $(function(){
     $('[name=cpf]').mask('999.999.999-99');
     $('[name=cnpj]').mask('99.999.999/9999-99');
-    $('[name=preco]').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
+    $('[name=valor]').maskMoney({prefix:'R$ ', allowNegative: true, thousands:'.', decimal:',', affixesStay: false});
     $('[name=tipo]').change(function(){
         var val = $(this).val();
         if(val == 'fisico'){

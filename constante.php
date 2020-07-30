@@ -18,6 +18,6 @@ define('BASE_DIR_PAINEL',__DIR__.'/painel');
 define('HOST','localhost');
 define('USER','root');
 define('PASS','');
-define('DB','db_imoveis');
+define('DB','db_imovel');
 
 ?>
